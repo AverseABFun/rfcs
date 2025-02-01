@@ -114,7 +114,33 @@ As you can see, the code needs to be unsafe and putting the safe code out of the
 # Reference-level explanation
 [reference-level-explanation]: #reference-level-explanation
 
-I'm not super familar with the internals of rustc, but the parts that would need to be modified are probably mostly the parts involving unsafe blocks. This would directly impact those parts because of the nature of the feature. As mentioned in the summary, this also adds a lint(I don't have any ideas for the name right now; please let me know any ideas) that would trigger upon the anti-pattern of `unsafe { safe { /* code */ } }`(or vice versa of course). I'll try to provide details about how it would be implemented, but I don't know how unsafe blocks are implemented to begin with, however based on the messages it appears as though this would be implemented in the AST passes section of rustc(let me know if this is completely incorrect or if I stated this incorrectly).
+A block of code can be prefixed with the `safe` keyword to disable [unsafe operations](https://doc.rust-lang.org/reference/unsafety.html) within an unsafe block. Example:
+```rust
+unsafe {
+    let b = [13u8, 17u8];
+    let a = &b[0] as *const u8;
+    assert_eq!(*a, 13);
+    assert_eq!(*a.offset(1), 17);
+    safe {
+        b[0] = 1;
+        b[1] = b.len();
+    }
+}
+
+unsafe {
+    let a = safe { a_safe_fn() };
+}
+
+unsafe fn an_unsafe_fn() -> [u8; 2] {
+    let b = [13u8, 17u8];
+    let a = &b[0] as *const u8;
+    safe {
+        b[0] = 1;
+        b[1] = b.len();
+    }
+    b
+}
+```
 
 # Drawbacks
 [drawbacks]: #drawbacks
