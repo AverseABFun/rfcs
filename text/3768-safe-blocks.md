@@ -176,6 +176,8 @@ Also, someone on the forum mentioned that asm_goto had to do a similar thing as 
 
 Before this RFC gets merged, I expect to resolve how where this would be implemented in the compilation process so this can be effectively implemented. Before merging, I also expect to resolve information relevant to the proposed lint such as the name, detection, and if adding said lint is even a good idea.
 
+Something considered out-of-scope would be single-operation unsafes. A brief explanation is it is an idea to add a way to mark a single operation as unsafe without making an unsafe block; however this is out-of-scope.
+
 # Future possibilities
 [future-possibilities]: #future-possibilities
 
