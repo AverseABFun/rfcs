@@ -1,6 +1,6 @@
 - Feature Name: safe_blocks
 - Start Date: 2025-01-31
-- RFC PR: [rust-lang/rfcs#0000](https://github.com/rust-lang/rfcs/pull/0000)
+- RFC PR: [rust-lang/rfcs#3768](https://github.com/rust-lang/rfcs/pull/3768)
 - Rust Issue: [rust-lang/rust#0000](https://github.com/rust-lang/rust/issues/0000)
 
 # Summary
